@@ -12,6 +12,7 @@ const navLinks = [
   { name: 'Education', href: '#education' },
   { name: 'Experience', href: '#experience' },
   { name: 'Skills', href: '#skills' },
+  { name: 'Projects', href: '#projects' },
   { name: 'Contact', href: '#contact' },
 ]
 
@@ -24,7 +25,7 @@ export default function Navbar() {
   useEffect(() => {
     setMounted(true)
     const handleScroll = () => {
-      const sections = ['home', 'about', 'education', 'experience', 'skills', 'contact']
+      const sections = ['home', 'about', 'education', 'experience', 'skills', 'projects', 'contact']
       const scrollPosition = window.scrollY + 100
 
       for (const section of sections) {
