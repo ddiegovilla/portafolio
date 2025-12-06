@@ -6,6 +6,13 @@ import { useRef } from 'react'
 import { Briefcase, Calendar } from 'lucide-react'
 import Image from 'next/image'
 
+// Helper function to get the correct path with basePath
+const getAssetPath = (path: string): string => {
+  const basePath = '/portafolio'
+  const cleanPath = path.startsWith('/') ? path : `/${path}`
+  return `${basePath}${cleanPath}`
+}
+
 const experiences = [
   {
     company: 'BOTBUSTERS 4635',
@@ -120,7 +127,7 @@ export default function Experience() {
           >
             <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10" />
             <Image
-              src="/images/robotics-competition.jpeg"
+              src={getAssetPath('/images/robotics-competition.jpeg')}
               alt="Robotics Competition"
               fill
               className="object-cover"
@@ -140,7 +147,7 @@ export default function Experience() {
           >
             <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10" />
             <Image
-              src="/images/ucsd.jpeg"
+              src={getAssetPath('/images/ucsd.jpeg')}
               alt="UCSD Research"
               fill
               className="object-cover"

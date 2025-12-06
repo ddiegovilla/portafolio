@@ -6,6 +6,14 @@ import { useRef, useState, useEffect, useCallback } from 'react'
 import { ExternalLink, X } from 'lucide-react'
 import Image from 'next/image'
 
+// Helper function to get the correct path with basePath for static export
+const getAssetPath = (path: string): string => {
+  const basePath = '/portafolio'
+  // Ensure path starts with /, then prepend basePath
+  const cleanPath = path.startsWith('/') ? path : `/${path}`
+  return `${basePath}${cleanPath}`
+}
+
 type ProjectMedia = {
   type: 'video' | 'image'
   src: string
@@ -62,7 +70,7 @@ export default function Projects() {
   const handleImageClick = (media: ProjectMedia, projectTitle: string) => {
     if (media.type === 'image') {
       setExpandedImage({
-        src: media.src,
+        src: getAssetPath(media.src),
         alt: media.alt || projectTitle,
       })
     }
@@ -127,7 +135,7 @@ export default function Projects() {
                 <div className="relative w-full aspect-video bg-gray-200 dark:bg-gray-800 overflow-hidden">
                   {project.media[0]?.type === 'video' ? (
                     <video
-                      src={project.media[0].src}
+                      src={getAssetPath(project.media[0].src)}
                       controls
                       className="absolute inset-0 w-full h-full object-cover"
                       preload="metadata"
@@ -140,7 +148,7 @@ export default function Projects() {
                       className="absolute inset-0 cursor-pointer hover:opacity-90 transition-opacity"
                     >
                       <Image
-                        src={project.media[0]?.src || '/images/robotics-competition.jpeg'}
+                        src={getAssetPath(project.media[0]?.src || '/images/robotics-competition.jpeg')}
                         alt={project.media[0]?.alt || project.title}
                         fill
                         className="object-cover"
@@ -190,7 +198,7 @@ export default function Projects() {
                         >
                           {media.type === 'video' ? (
                             <video
-                              src={media.src}
+                              src={getAssetPath(media.src)}
                               className="w-full h-full object-cover"
                               preload="metadata"
                             />
@@ -200,7 +208,7 @@ export default function Projects() {
                               className="cursor-pointer hover:opacity-90 transition-opacity"
                             >
                               <Image
-                                src={media.src}
+                                src={getAssetPath(media.src)}
                                 alt={media.alt || `${project.title} ${mediaIndex + 2}`}
                                 fill
                                 className="object-cover"

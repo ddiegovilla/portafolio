@@ -6,6 +6,13 @@ import { useRef } from 'react'
 import { Linkedin, Mail, Github } from 'lucide-react'
 import Image from 'next/image'
 
+// Helper function to get the correct path with basePath
+const getAssetPath = (path: string): string => {
+  const basePath = '/portafolio'
+  const cleanPath = path.startsWith('/') ? path : `/${path}`
+  return `${basePath}${cleanPath}`
+}
+
 export default function About() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
@@ -32,7 +39,7 @@ export default function About() {
               className="relative mx-auto w-64 h-64"
             >
               <Image
-                src="/images/profile.jpeg"
+                src={getAssetPath('/images/profile.jpeg')}
                 alt="Diego Villanueva Fernandez"
                 width={256}
                 height={256}
